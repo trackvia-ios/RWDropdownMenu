@@ -62,6 +62,21 @@
     }
 }
 
+/*
+- (void)setSelected:(BOOL)selected
+{
+    if (selected)
+    {
+        self.tintColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+    }
+    else
+    {
+        self.tintColor = nil;
+    }
+    [super setSelected:selected];
+}
+ */
+
 - (void)setAlignment:(RWDropdownMenuCellAlignment)alignment
 {
     _alignment = alignment;
@@ -109,7 +124,7 @@
             break;
             
         case RWDropdownMenuCellAlignmentLeft:
-            vfs = @"H:[image]-(15)-[text]|";
+            vfs = @"H:|-[image]-(15)-[text(240.0)]";
             [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:margin]];
             break;
             
@@ -121,8 +136,6 @@
         default:
             break;
     }
-    
-    [self.imageView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfs options:0 metrics:nil views:views]];
 }
