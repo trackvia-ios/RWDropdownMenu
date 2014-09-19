@@ -17,7 +17,7 @@
     {
         self.textLabel = [UILabel new];
         self.textLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
+        self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
         self.textLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.textLabel];
         self.imageView = [UIImageView new];
@@ -26,6 +26,9 @@
         self.backgroundColor = [UIColor clearColor];
         self.imageView.image = nil;
         self.selectedBackgroundView = [UIView new];
+        self.imageView.layer.cornerRadius = 8.0;
+        self.imageView.layer.masksToBounds = YES;
+        self.imageView.clipsToBounds = YES;
         
     }
     return self;
@@ -58,21 +61,6 @@
         self.imageView.tintColor = self.tintColor;
     }
 }
-
-/*
-- (void)setSelected:(BOOL)selected
-{
-    if (selected)
-    {
-        self.tintColor = [UIColor colorWithWhite:0.2 alpha:1.0];
-    }
-    else
-    {
-        self.tintColor = nil;
-    }
-    [super setSelected:selected];
-}
- */
 
 - (void)setAlignment:(RWDropdownMenuCellAlignment)alignment
 {
@@ -133,6 +121,8 @@
         default:
             break;
     }
+    
+    [self.imageView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfs options:0 metrics:nil views:views]];
 }
