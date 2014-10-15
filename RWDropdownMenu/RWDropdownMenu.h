@@ -50,9 +50,19 @@ typedef NS_ENUM(NSInteger, RWDropdownMenuStyle) {
 @property (nonatomic, strong, readonly) UIImage *image;
 
 /**
+ *  Should show star or not
+ */
+@property (nonatomic, assign) BOOL isFavorite;
+
+/**
+ * Image to use to show favorites
+ **/
+@property (nonatomic, assign) NSString* favoriteImageName;
+
+/**
  *  Creates a menu item with given title, image and action.
  */
-+ (instancetype)itemWithText:(NSString *)text image:(UIImage *)image action:(void (^)(void))action;
++ (instancetype)itemWithText:(NSString *)text image:(UIImage *)image isFavorite:(BOOL)showFavorite withFavoriteImage:(NSString*)favoriteImageName action:(void (^)(void))action;
 
 @end
 

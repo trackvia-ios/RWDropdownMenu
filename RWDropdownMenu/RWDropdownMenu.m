@@ -50,12 +50,14 @@
 
 @implementation RWDropdownMenuItem
 
-+ (instancetype)itemWithText:(NSString *)text image:(UIImage *)image action:(void (^)(void))action
++ (instancetype)itemWithText:(NSString *)text image:(UIImage *)image isFavorite:(BOOL)showFavorite withFavoriteImage:(NSString*)favoriteImageName action:(void (^)(void))action
 {
     RWDropdownMenuItem *item = [self new];
     item.text = text;
     item.image = image;
     item.action = action;
+    item.isFavorite = showFavorite;
+    item.favoriteImageName = favoriteImageName;
     return item;
 }
 
@@ -274,6 +276,12 @@ static NSString * const CellId = @"RWDropdownMenuCell";
     cell.textLabel.text = item.text;
     cell.imageView.image = item.image;
     cell.alignment = self.alignment;
+    cell.starImageView.hidden = !item.isFavorite;
+    if (item.isFavorite) {
+        cell.starImageView.image = [UIImage imageNamed:item.favoriteImageName];
+    }else{
+        cell.starImageView.image = nil;
+    }
     
     return cell;
 }
@@ -365,7 +373,7 @@ static NSString * const CellId = @"RWDropdownMenuCell";
     [nav.navigationBar addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:menu action:@selector(dismiss:)]];
     
     nav.transitioningDelegate = menu;
-    nav.modalPresentationStyle = UIModalPresentationCurrentContext;
+    nav.modalPresentationStyle = UIModalPresentationCustom;
     
     [viewController presentViewController:nav animated:YES completion:^{
         if (completion)

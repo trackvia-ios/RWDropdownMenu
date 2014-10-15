@@ -17,7 +17,7 @@
     {
         self.textLabel = [UILabel new];
         self.textLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
+        self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
         self.textLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.textLabel];
         self.imageView = [UIImageView new];
@@ -26,6 +26,14 @@
         self.backgroundColor = [UIColor clearColor];
         self.imageView.image = nil;
         self.selectedBackgroundView = [UIView new];
+        self.imageView.layer.cornerRadius = 8.0;
+        self.imageView.layer.masksToBounds = YES;
+        self.imageView.clipsToBounds = YES;
+        
+        self.starImageView = [UIImageView new];
+        self.starImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.contentView addSubview:self.starImageView];
+        //self.starImageView.hidden=YES;
         
     }
     return self;
@@ -98,7 +106,7 @@
 {
     [super updateConstraints];
     [self.contentView removeConstraints:self.contentView.constraints];
-    NSDictionary *views = @{@"text":self.textLabel, @"image":self.imageView};
+    NSDictionary *views = @{@"text":self.textLabel, @"image":self.imageView, @"star":self.starImageView};
     
     // vertical centering
     for (UIView *v in [views allValues])
@@ -107,6 +115,7 @@
     }
     
     CGFloat margin = 20;
+    CGFloat textWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)? 200 : [UIScreen mainScreen].bounds.size.width-120;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
@@ -121,7 +130,8 @@
             break;
             
         case RWDropdownMenuCellAlignmentLeft:
-            vfs = @"H:[image]-(15)-[text]|";
+            vfs = [NSString stringWithFormat:@"H:|-[image]-(15)-[text(%f)]-(15)-[star]", textWidth];
+            //vfs = @"H:|-[image]-(15)-[text(240.0)]";
             [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:margin]];
             break;
             
