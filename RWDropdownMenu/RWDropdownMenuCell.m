@@ -29,11 +29,11 @@
         self.imageView.layer.cornerRadius = 8.0;
         self.imageView.layer.masksToBounds = YES;
         self.imageView.clipsToBounds = YES;
-        
         self.starImageView = [UIImageView new];
         self.starImageView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:self.starImageView];
         //self.starImageView.hidden=YES;
+
         
     }
     return self;
