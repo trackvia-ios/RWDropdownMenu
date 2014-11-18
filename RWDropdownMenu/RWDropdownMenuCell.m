@@ -115,7 +115,6 @@
     }
     
     CGFloat margin = 20;
-    CGFloat textWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)? 200 : [UIScreen mainScreen].bounds.size.width-120;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
@@ -130,9 +129,9 @@
             break;
             
         case RWDropdownMenuCellAlignmentLeft:
-            vfs = [NSString stringWithFormat:@"H:|-[image]-(15)-[text(%f)]-(15)-[star]", textWidth];
-            //vfs = @"H:|-[image]-(15)-[text(240.0)]";
+            vfs = @"H:|-[image]-(15)-[text]";
             [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:margin]];
+            [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.starImageView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-margin]];
             break;
             
         case RWDropdownMenuCellAlignmentRight:
@@ -143,7 +142,8 @@
         default:
             break;
     }
-    
+
+    [self.imageView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal]; 
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfs options:0 metrics:nil views:views]];
 }
 
