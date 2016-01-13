@@ -242,7 +242,7 @@ static NSString * const CellId = @"RWDropdownMenuCell";
 
 - (CGSize)preferredContentSize
 {
-    CGSize size = CGSizeMake(self.view.bounds.size.width, 0);
+    CGSize size = CGSizeMake(320, 0);
     size.height = [self itemHeight] * self.items.count;
     if (self.items.count > 0)
     {
