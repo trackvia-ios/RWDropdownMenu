@@ -106,6 +106,14 @@ typedef NS_ENUM(NSInteger, RWDropdownMenuStyle) {
                       navBarButtonItem:(UIBarButtonItem *)navBarButtonItem
                        completion:(void (^)(void))completion;
 
++ (void)presentFromViewController:(UIViewController *)viewController
+                        withItems:(NSArray *)items
+                            align:(RWDropdownMenuCellAlignment)align
+                            style:(RWDropdownMenuStyle)style
+                 navBarButtonTitle:(NSString *)title
+                navBarButtonFont:(UIFont *)font
+                       completion:(void (^)(void))completion;
+
 /**
  *  Show a menu from a bar button item in a popover. 
  *  The menu is shown also inside a popover.

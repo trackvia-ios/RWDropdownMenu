@@ -242,7 +242,7 @@ static NSString * const CellId = @"RWDropdownMenuCell";
 
 - (CGSize)preferredContentSize
 {
-    CGSize size = CGSizeMake(320, 0);
+    CGSize size = CGSizeMake(self.view.bounds.size.width, 0);
     size.height = [self itemHeight] * self.items.count;
     if (self.items.count > 0)
     {
@@ -358,6 +358,45 @@ static NSString * const CellId = @"RWDropdownMenuCell";
                        completion:(void (^)(void))completion
 {
     RWDropdownMenu *menu = [[RWDropdownMenu alloc] initWithNibName:nil bundle:nil];
+    menu.style = style;
+    menu.alignment = align;
+    menu.items = items;
+    menu.navBarButtonItem = navBarButtonItem;
+
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menu];
+    nav.view.tintColor = menu.view.tintColor;
+    nav.navigationBar.barStyle = UIBarStyleBlack;
+    nav.navigationBar.translucent = YES;
+    [nav.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [nav.navigationBar setShadowImage:[UIImage new]];
+    nav.navigationBar.userInteractionEnabled = YES;
+    [nav.navigationBar addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:menu action:@selector(dismiss:)]];
+
+    nav.transitioningDelegate = menu;
+    nav.modalPresentationStyle = UIModalPresentationCustom;
+
+    [viewController presentViewController:nav animated:YES completion:^{
+        if (completion)
+        {
+            completion();
+        }
+    }];
+}
+
++ (void)presentFromViewController:(UIViewController *)viewController
+                        withItems:(NSArray *)items
+                            align:(RWDropdownMenuCellAlignment)align
+                            style:(RWDropdownMenuStyle)style
+                navBarButtonTitle:(NSString *)title
+                 navBarButtonFont:(UIFont *)font
+                       completion:(void (^)(void))completion
+{
+    RWDropdownMenu *menu = [[RWDropdownMenu alloc] initWithNibName:nil bundle:nil];
+
+    UIBarButtonItem *navBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:menu action:@selector(dismiss:)];
+    [navBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: font} forState:UIControlStateNormal];
+    [navBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: font} forState:UIControlStateHighlighted];
+
     menu.style = style;
     menu.alignment = align;
     menu.items = items;
