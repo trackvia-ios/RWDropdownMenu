@@ -354,39 +354,6 @@ static NSString * const CellId = @"RWDropdownMenuCell";
                         withItems:(NSArray *)items
                             align:(RWDropdownMenuCellAlignment)align
                             style:(RWDropdownMenuStyle)style
-                 navBarButtonItem:(UIBarButtonItem *)navBarButtonItem
-                       completion:(void (^)(void))completion
-{
-    RWDropdownMenu *menu = [[RWDropdownMenu alloc] initWithNibName:nil bundle:nil];
-    menu.style = style;
-    menu.alignment = align;
-    menu.items = items;
-    menu.navBarButtonItem = navBarButtonItem;
-
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menu];
-    nav.view.tintColor = menu.view.tintColor;
-    nav.navigationBar.barStyle = UIBarStyleBlack;
-    nav.navigationBar.translucent = YES;
-    [nav.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    [nav.navigationBar setShadowImage:[UIImage new]];
-    nav.navigationBar.userInteractionEnabled = YES;
-    [nav.navigationBar addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:menu action:@selector(dismiss:)]];
-
-    nav.transitioningDelegate = menu;
-    nav.modalPresentationStyle = UIModalPresentationCustom;
-
-    [viewController presentViewController:nav animated:YES completion:^{
-        if (completion)
-        {
-            completion();
-        }
-    }];
-}
-
-+ (void)presentFromViewController:(UIViewController *)viewController
-                        withItems:(NSArray *)items
-                            align:(RWDropdownMenuCellAlignment)align
-                            style:(RWDropdownMenuStyle)style
                 navBarButtonTitle:(NSString *)title
                  navBarButtonFont:(UIFont *)font
                        completion:(void (^)(void))completion

@@ -98,14 +98,6 @@ typedef NS_ENUM(NSInteger, RWDropdownMenuStyle) {
                       navBarImage:(UIImage *)navBarImage
                        completion:(void (^)(void))completion;
 
-
-+ (void)presentFromViewController:(UIViewController *)viewController
-                        withItems:(NSArray *)items
-                            align:(RWDropdownMenuCellAlignment)align
-                            style:(RWDropdownMenuStyle)style
-                      navBarButtonItem:(UIBarButtonItem *)navBarButtonItem
-                       completion:(void (^)(void))completion;
-
 + (void)presentFromViewController:(UIViewController *)viewController
                         withItems:(NSArray *)items
                             align:(RWDropdownMenuCellAlignment)align
