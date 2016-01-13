@@ -99,6 +99,7 @@ static NSString * const CellId = @"RWDropdownMenuCell";
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, assign) RWDropdownMenuCellAlignment alignment;
 @property (nonatomic, strong) UIImage *navBarImage;
+@property (nonatomic, strong) UIBarButtonItem *navBarButtonItem;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, assign) RWDropdownMenuStyle style;
 
@@ -220,10 +221,9 @@ static NSString * const CellId = @"RWDropdownMenuCell";
 
 - (void)prepareNavigationItem
 {
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:self.navBarImage style:UIBarButtonItemStylePlain target:self action:@selector(dismiss:)];
     if (self.alignment == RWDropdownMenuCellAlignmentLeft)
     {
-        self.navigationItem.leftBarButtonItem = barButtonItem;
+        self.navigationItem.leftBarButtonItem = self.navBarButtonItem;
     }
     else
     {
@@ -232,7 +232,7 @@ static NSString * const CellId = @"RWDropdownMenuCell";
     
     if (self.alignment == RWDropdownMenuCellAlignmentRight)
     {
-        self.navigationItem.rightBarButtonItem = barButtonItem;
+        self.navigationItem.rightBarButtonItem = self.navBarButtonItem;
     }
     else
     {
@@ -348,6 +348,39 @@ static NSString * const CellId = @"RWDropdownMenuCell";
 {
     [self prepareNavigationItem];
     [viewController presentViewController:self animated:YES completion:completion];
+}
+
++ (void)presentFromViewController:(UIViewController *)viewController
+                        withItems:(NSArray *)items
+                            align:(RWDropdownMenuCellAlignment)align
+                            style:(RWDropdownMenuStyle)style
+                 navBarButtonItem:(UIBarButtonItem *)navBarButtonItem
+                       completion:(void (^)(void))completion
+{
+    RWDropdownMenu *menu = [[RWDropdownMenu alloc] initWithNibName:nil bundle:nil];
+    menu.style = style;
+    menu.alignment = align;
+    menu.items = items;
+    menu.navBarButtonItem = navBarButtonItem;
+
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menu];
+    nav.view.tintColor = menu.view.tintColor;
+    nav.navigationBar.barStyle = UIBarStyleBlack;
+    nav.navigationBar.translucent = YES;
+    [nav.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [nav.navigationBar setShadowImage:[UIImage new]];
+    nav.navigationBar.userInteractionEnabled = YES;
+    [nav.navigationBar addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:menu action:@selector(dismiss:)]];
+
+    nav.transitioningDelegate = menu;
+    nav.modalPresentationStyle = UIModalPresentationCustom;
+
+    [viewController presentViewController:nav animated:YES completion:^{
+        if (completion)
+        {
+            completion();
+        }
+    }];
 }
 
 + (void)presentFromViewController:(UIViewController *)viewController
