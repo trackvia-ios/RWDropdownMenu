@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, RWDropdownMenuCellAlignment) {
 @property (nonatomic, strong) UIImageView *starImageView;
 @property (nonatomic, assign) RWDropdownMenuCellAlignment alignment;
 @property (nonatomic, assign) BOOL isFavorite;
+@property (nonatomic, assign) BOOL isItemSelected;
 @property (nonatomic, strong) NSString* favoriteImageName;
 
 @end
