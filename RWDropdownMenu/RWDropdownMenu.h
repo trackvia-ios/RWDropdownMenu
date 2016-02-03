@@ -67,7 +67,7 @@ typedef NS_ENUM(NSInteger, RWDropdownMenuStyle) {
 /**
  *  Creates a menu item with given title, image and action.
  */
-+ (instancetype)itemWithText:(NSString *)text image:(UIImage *)image isFavorite:(BOOL)showFavorite withFavoriteImage:(NSString*)favoriteImageName action:(void (^)(void))action;
++ (instancetype)itemWithText:(NSString *)text image:(UIImage *)image isFavorite:(BOOL)showFavorite withFavoriteImage:(NSString*)favoriteImageName isItemSelected:(BOOL)isItemSelected action:(void (^)(void))action;
 
 @end
 
