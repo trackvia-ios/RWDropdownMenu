@@ -55,6 +55,11 @@ typedef NS_ENUM(NSInteger, RWDropdownMenuStyle) {
 @property (nonatomic, assign) BOOL isFavorite;
 
 /**
+ *  Should show bar for currently selected menu item
+ */
+@property (nonatomic, assign) BOOL isItemSelected;
+
+/**
  * Image to use to show favorites
  **/
 @property (nonatomic, assign) NSString* favoriteImageName;
