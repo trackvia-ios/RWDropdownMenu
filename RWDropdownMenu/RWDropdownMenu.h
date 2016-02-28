@@ -124,6 +124,7 @@ typedef NS_ENUM(NSInteger, RWDropdownMenuStyle) {
                                 withItems:(NSArray *)items
                                     style:(RWDropdownMenuStyle)style
                                completion:(void (^)(void))completion;
++ (void)dismissPopover;
 
 @end
 

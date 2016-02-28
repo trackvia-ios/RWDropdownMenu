@@ -450,12 +450,24 @@ static NSString * const CellId = @"RWDropdownMenuCell";
     helper.popover = [[UIPopoverController alloc] initWithContentViewController:menu];
     helper.popover.delegate = helper;
     [helper.popover presentPopoverFromBarButtonItem:barButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [menu enterTheStageWithCompletion:^{
             }];
         }];
     }];
+}
+
++ (void)dismissPopover
+{
+    RWDropdownMenuPopoverHelper *helper = [RWDropdownMenuPopoverHelper sharedInstance];
+    
+    if (helper.popover)
+    {
+        [helper.popover dismissPopoverAnimated:YES];
+        helper.popover = nil;
+    }
 }
 
 #pragma mark - transition
