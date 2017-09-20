@@ -27,11 +27,45 @@
     {
         _menuItems =
         @[
-          [RWDropdownMenuItem itemWithText:@"Twitter" image:[UIImage imageNamed:@"icon_twitter"] action:nil],
-          [RWDropdownMenuItem itemWithText:@"Facebook" image:[UIImage imageNamed:@"icon_facebook"] action:nil],
-          [RWDropdownMenuItem itemWithText:@"Message" image:[UIImage imageNamed:@"icon_message"] action:nil],
-          [RWDropdownMenuItem itemWithText:@"Email" image:[UIImage imageNamed:@"icon_email"] action:nil],
-          [RWDropdownMenuItem itemWithText:@"Save to Photo Album" image:[UIImage imageNamed:@"icon_album"] action:nil],
+          [RWDropdownMenuItem itemWithText:@"Twitter"
+                                identifier:@"Twitter"
+                                     image:[UIImage imageNamed:@"icon_twitter"]
+                                isFavorite:YES
+                         withFavoriteImage:@"Twitter"
+                            isItemSelected:NO
+                                    action:nil],
+          
+          [RWDropdownMenuItem itemWithText:@"Facebook"
+                                identifier:@"Facebook"
+                                     image:[UIImage imageNamed:@"icon_facebook"]
+                                isFavorite:NO
+                         withFavoriteImage:@"Facebook"
+                            isItemSelected:NO
+                                    action:nil],
+          
+          [RWDropdownMenuItem itemWithText:@"Message"
+                                identifier:@"Message"
+                                     image:[UIImage imageNamed:@"icon_message"]
+                                isFavorite:NO
+                         withFavoriteImage:@"Message"
+                            isItemSelected:NO
+                                    action:nil],
+          
+          [RWDropdownMenuItem itemWithText:@"Email"
+                                identifier:@"Email"
+                                     image:[UIImage imageNamed:@"icon_email"]
+                                isFavorite:NO
+                         withFavoriteImage:@"Email"
+                            isItemSelected:NO
+                                    action:nil],
+          
+          [RWDropdownMenuItem itemWithText:@"Save to Photo Album"
+                                identifier:@"Save to Photo Album"
+                                     image:[UIImage imageNamed:@"icon_album"]
+                                isFavorite:NO
+                         withFavoriteImage:@"Save to Photo Album"
+                            isItemSelected:NO
+                                    action:nil],
           ];
     }
     return _menuItems;
@@ -49,22 +83,44 @@
         alignment = RWDropdownMenuCellAlignmentRight;
     }
     
-    [RWDropdownMenu presentFromViewController:self withItems:self.menuItems align:alignment style:self.menuStyle navBarImage:[sender image] completion:nil];
+    [RWDropdownMenu presentFromViewController:self
+                                    withItems:self.menuItems
+                                        align:alignment
+                                        style:self.menuStyle
+                                  navBarImage:nil
+                                   completion:nil];
 }
 
 - (void)presentMenuInPopover:(id)sender
 {
-    [RWDropdownMenu presentInPopoverFromBarButtonItem:sender withItems:self.menuItems completion:nil];
+    [RWDropdownMenu presentInPopoverFromBarButtonItem:sender
+                                            withItems:self.menuItems
+                                                style:RWDropdownMenuStyleWhite
+                                           completion:nil];
 }
 
 - (void)presentStyleMenu:(id)sender
 {
     NSArray *styleItems =
     @[
-      [RWDropdownMenuItem itemWithText:@"Black Gradient" image:nil action:^{
+      [RWDropdownMenuItem itemWithText:@"Black Gradient"
+                            identifier:@"Black Gradient"
+                                 image:nil
+                            isFavorite:NO
+                     withFavoriteImage:@"Black Gradient"
+                        isItemSelected:NO
+                                action:^(RWDropdownMenuItem *item) {
           self.menuStyle = RWDropdownMenuStyleBlackGradient;
       }],
-      [RWDropdownMenuItem itemWithText:@"Translucent" image:nil action:^{
+      
+      [RWDropdownMenuItem itemWithText:@"Translucent"
+                            identifier:@"Translucent"
+                                 image:nil
+                            isFavorite:NO
+                     withFavoriteImage:@"Translucent"
+                        isItemSelected:NO
+                                action:^(RWDropdownMenuItem *item) {
+                                    
           self.menuStyle = RWDropdownMenuStyleTranslucent;
       }],
       ];

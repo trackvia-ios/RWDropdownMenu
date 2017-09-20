@@ -221,6 +221,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Zhang Bin";
 				TargetAttributes = {
+					3AB2E45C193834D300612E1F = {
+						DevelopmentTeam = CDNDP3ZYKL;
+					};
 					3AB2E477193834D400612E1F = {
 						TestTargetID = 3AB2E45C193834D300612E1F;
 					};
@@ -393,6 +396,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = CDNDP3ZYKL;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RWDropdownMenuDemo/RWDropdownMenuDemo-Prefix.pch";
 				INFOPLIST_FILE = "RWDropdownMenuDemo/RWDropdownMenuDemo-Info.plist";
@@ -406,6 +410,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = CDNDP3ZYKL;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RWDropdownMenuDemo/RWDropdownMenuDemo-Prefix.pch";
 				INFOPLIST_FILE = "RWDropdownMenuDemo/RWDropdownMenuDemo-Info.plist";

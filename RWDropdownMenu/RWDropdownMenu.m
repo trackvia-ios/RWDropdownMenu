@@ -42,18 +42,26 @@
 
 @interface RWDropdownMenuItem ()
 
+@property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, copy) NSString *text;
-@property (nonatomic, copy) void (^action)(void);
+@property (nonatomic, copy) void (^action)(RWDropdownMenuItem *item);
 @property (nonatomic, strong) UIImage *image;
 
 @end
 
 @implementation RWDropdownMenuItem
 
-+ (instancetype)itemWithText:(NSString *)text image:(UIImage *)image isFavorite:(BOOL)showFavorite withFavoriteImage:(NSString*)favoriteImageName isItemSelected:(BOOL)isItemSelected action:(void (^)(void))action
++ (instancetype)itemWithText:(NSString *)text
+                  identifier:(NSString *)identifier
+                       image:(UIImage *)image
+                  isFavorite:(BOOL)showFavorite
+           withFavoriteImage:(NSString *)favoriteImageName
+              isItemSelected:(BOOL)isItemSelected
+                      action:(void (^)(RWDropdownMenuItem *item))action
 {
     RWDropdownMenuItem *item = [self new];
     item.text = text;
+    item.identifier = identifier;
     item.image = image;
     item.action = action;
     item.isFavorite = showFavorite;
@@ -302,7 +310,7 @@ static NSString * const CellId = @"RWDropdownMenuCell";
             [[RWDropdownMenuPopoverHelper sharedInstance].popover dismissPopoverAnimated:YES];
             if (item.action)
             {
-                item.action();
+                item.action(item);
             }
         }
         [self dismissViewControllerAnimated:YES completion:^{
@@ -311,7 +319,7 @@ static NSString * const CellId = @"RWDropdownMenuCell";
                 double delayInSeconds = 0.15;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    item.action();
+                    item.action(item);
                 });
             }
         }];
